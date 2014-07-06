@@ -17,7 +17,7 @@
     <![endif]-->
   </head>
   <body>
-	<div class="container">
+	<div class="container" id="body">
 		<div class="well">
 			<div class="input-group">
 				<input type="text" class="form-control" id="pastebinurl" placeholder="ID">
@@ -49,7 +49,9 @@
 				</div>
 			</div>
 		</div>
-	<div id="samplecategory" class="well">
+		<div id="categories">
+		</div>
+	<div id="samplecategory" class="well category">
 	<div class="close"><span aria-hidden="true">&times;</span></div>
 		<h3>Category</h3>
 		<div class="form-horizontal">
@@ -72,9 +74,16 @@
 				</div>
 			</div>
 		</div>
-		<div id="optionsbox">
+		<div class="optionsbox">
 			<h4>Options:</h4>
-			<div id="sampleoption" class="well">
+			
+		</div>
+		<div class="clearfix"><p><a class="btn btn-default btn-lg pull-right addoptionbtn" role="button" style="margin-right: 10px;">Add Option</a></p></div>
+	</div>
+	
+	<div id="sampleoption" class="well option">
+		<div class="close clearfix"><span aria-hidden="true">&times;</span></div><br/><br/>
+	
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label for="inputTitle" class="control-label col-xs-2">Title</label>
@@ -121,17 +130,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPrereq" class="control-label col-xs-2">Quantity</label>
+						<label for="inputPrereq" class="control-label col-xs-2">Max Quantity</label>
 						<div class="col-xs-10">
 							<input type="text" class="form-control" id="inputHeader" placeholder="Number" value="1" />
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="clearfix"><p><a class="btn btn-default btn-lg pull-right" role="button" style="margin-right: 10px;">Add Option</a></p></div>
+	<div id="xmloutput" class="well">
 	</div>
-	<div><p><a class="btn btn-primary btn-lg pull-right" role="button">Export</a><a class="btn btn-default btn-lg pull-right" role="button" style="margin-right: 10px;">Add Category</a></p></div>
+	
+	<div><p><a class="btn btn-primary btn-lg pull-right" role="button" id="exportbtn" >Export</a><a class="btn btn-default btn-lg pull-right" role="button" style="margin-right: 10px;" id="addcatbtn" >Add Category</a></p></div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
