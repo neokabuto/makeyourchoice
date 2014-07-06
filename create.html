@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Make Your Choice</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="container">
+		<div class="well">
+			<div class="input-group">
+				<input type="text" class="form-control" id="pastebinurl" placeholder="ID">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="loadfrompastebin">Load from Pastebin</button>
+				</span>
+			</div>
+		</div>
+		<div class="well" id="settings">
+			<h3>Settings</h3>
+			<div class="form-horizontal">
+				<div class="form-group">
+					<label for="inputTitle" class="control-label col-xs-2">Title</label>
+					<div class="col-xs-10">
+						<input type="text" class="form-control" id="inputTitle" placeholder="Title">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputHeader" class="control-label col-xs-2">Header Image</label>
+					<div class="col-xs-10">
+						<input type="text" class="form-control" id="inputHeader" placeholder="URL">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPoints" class="control-label col-xs-2">Starting Points</label>
+					<div class="col-xs-10">
+						<input type="text" class="form-control" id="inputPoints" placeholder="Points">
+					</div>
+				</div>
+			</div>
+		</div>
+	<div id="samplecategory" class="well">
+	<div class="close"><span aria-hidden="true">&times;</span></div>
+		<h3>Category</h3>
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label for="inputTitle" class="control-label col-xs-2">Title</label>
+				<div class="col-xs-10">
+					<input type="text" class="form-control" id="inputTitle" placeholder="Title">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputHeader" class="control-label col-xs-2">Header Image</label>
+				<div class="col-xs-10">
+					<input type="text" class="form-control" id="inputHeader" placeholder="URL">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputEmail" class="control-label col-xs-2">Description</label>
+				<div class="col-xs-10" id="description">
+					<textarea class="form-control" ></textarea>
+				</div>
+			</div>
+		</div>
+		<div id="optionsbox">
+			<h4>Options:</h4>
+			<div id="sampleoption" class="well">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label for="inputTitle" class="control-label col-xs-2">Title</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control" id="inputTitle" placeholder="Title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail" class="control-label col-xs-2">Description</label>
+						<div class="col-xs-10" id="description">
+							<textarea class="form-control" ></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputHeader" class="control-label col-xs-2">Header Image</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control" id="inputHeader" placeholder="URL">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputHeader" class="control-label col-xs-2">Cost</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control" id="inputHeader" placeholder="Points">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPrereq" class="control-label col-xs-2">Prerequisite</label>
+						<div class="col-xs-10">
+							<select class="form-control" id="inputPrereq">
+							<option>None Required</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputStartHidden" class="control-label col-xs-2">Hide without Prereq</label>
+						<div class="col-xs-10">
+							<input type="checkbox" id="inputStartHidden" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputSpec" class="control-label col-xs-2">Allow Specification</label>
+						<div class="col-xs-10">
+							<input type="checkbox" id="inputSpec" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPrereq" class="control-label col-xs-2">Quantity</label>
+						<div class="col-xs-10">
+							<input type="text" class="form-control" id="inputHeader" placeholder="Number" value="1" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"><p><a class="btn btn-default btn-lg pull-right" role="button" style="margin-right: 10px;">Add Option</a></p></div>
+	</div>
+	<div><p><a class="btn btn-primary btn-lg pull-right" role="button">Export</a><a class="btn btn-default btn-lg pull-right" role="button" style="margin-right: 10px;">Add Category</a></p></div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/create.js"></script>
+  </body>
+</html>
