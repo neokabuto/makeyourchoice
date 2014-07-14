@@ -68,9 +68,29 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail" class="control-label col-xs-2">Description</label>
+				<label for="inputDescription" class="control-label col-xs-2">Description</label>
 				<div class="col-xs-10" id="description">
-					<textarea class="form-control" ></textarea>
+					<textarea class="form-control" id="inputDescription" name = "inputDescription" ></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputPrereq" class="control-label col-xs-2">Prerequisite</label>
+				<div class="col-xs-10">
+					<select class="form-control" id="inputPrereq" class="prereq">
+					<option>None Required</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputStartHidden" class="control-label col-xs-2">Hide without Prereq?</label>
+				<div class="col-xs-10">
+					<input type="checkbox" id="inputStartHidden" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="inputMaxChoices" class="control-label col-xs-2">Max. Number of Choices</label>
+				<div class="col-xs-10">
+					<input type="text" class="form-control" id="inputMaxChoices"  placeholder="Number" value="1">
 				</div>
 			</div>
 		</div>
@@ -112,19 +132,19 @@
 					<div class="form-group">
 						<label for="inputPrereq" class="control-label col-xs-2">Prerequisite</label>
 						<div class="col-xs-10">
-							<select class="form-control" id="inputPrereq">
+							<select class="form-control" id="inputPrereq" class="prereq">
 							<option>None Required</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputStartHidden" class="control-label col-xs-2">Hide without Prereq</label>
+						<label for="inputStartHidden" class="control-label col-xs-2">Hide without Prereq?</label>
 						<div class="col-xs-10">
 							<input type="checkbox" id="inputStartHidden" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputSpec" class="control-label col-xs-2">Allow Specification</label>
+						<label for="inputSpec" class="control-label col-xs-2">Allow Specification?</label>
 						<div class="col-xs-10">
 							<input type="checkbox" id="inputSpec" />
 						</div>
