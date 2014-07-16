@@ -49,7 +49,32 @@ $(function(){
 	
 	$(".option input").change(updatePrereqs);
 	
+	$("#loadfrompastebin").click( function(){
+		var pasteinput = $("#pastebinurl").val();
+		
+		var pastebinurl = "http://www.pastebin.com/raw.php?i=";
+		
+		if(pasteinput.indexOf("pastebin.com/raw.php?i=") !== -1){
+			pastebinurl += pasteinput.substr(pasteinput.indexOf("pastebin.com/raw.php?i=") + "pastebin.com/raw.php?i=".length);
+		} else {
+			pastebinurl += pasteinput;
+		}
+		
+		pastebinurl = "http://pastebin.com/raw.php?i=2yht3FHq";
+		
+		var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from xml where url="' + pastebinurl + '"') + '&format=xml&callback=cbFunc';
+		
+		$.ajax({ url : yql,
+			datatype: "jsonp",
+			jsonp: "cbFunc",
+			jsonpCallback: cbFunc
+		});
+	});
 });
+
+var cbFunc = function(data){
+	loadFromXML(data.results[0]);
+}
 
 var listOptions = function () {
 	var list = [];
@@ -128,7 +153,7 @@ var toXML = function() {
 		}
 		
 		output += "\t\t\t<starthidden>\n\t\t\t\t";
-		output += $(element).find("#inputStartHidden").val();
+		output += $(element).find("#inputStartHidden").prop('checked');
 		output += "\n\t\t\t</starthidden>\n";
 		
 		output += "\t\t\t<maxchoices>\n\t\t\t\t";
@@ -166,11 +191,11 @@ var toXML = function() {
 			}
 			
 			output += "\t\t\t\t<starthidden>\n\t\t\t\t\t";
-			output += $(oelement).find("#inputStartHidden").val();
+			output += $(oelement).find("#inputStartHidden").prop('checked');
 			output += "\n\t\t\t\t</starthidden>\n";
 			
 			output += "\t\t\t\t<specification>\n\t\t\t\t\t";
-			output += $(oelement).find("#inputSpec").val();
+			output += $(oelement).find("#inputSpec").prop('checked');
 			output += "\n\t\t\t\t</specification>\n";
 			
 			output += "\t\t\t\t<maxquantity>\n\t\t\t\t\t";
@@ -189,4 +214,119 @@ var toXML = function() {
 	
 	output += "</doc>";
 	return output;
+};
+
+var loadFromXML = function(xml){
+	xml = xml.replace(/[\n|\t|\r]/g, "");
+	xml = $.parseXML(xml);
+	
+	//clear existing
+	$("#settings input").val("");
+	$(".category:not(#samplecategory)").remove();
+	
+	$(xml).find("settings").find("setting").each(function(index, element) {
+		switch($(element).attr("key")){
+			case "Title":
+				$("#settings #inputTitle").val($(element).text());
+				break;
+			case "StartPoints":
+				$("#settings #inputPoints").val($(element).text());
+				break;
+			case "HeaderImage":
+				$("#settings #inputHeader").val($(element).text());
+				break;
+		}
+	});
+	
+	var maxcatid = 0;
+	var maxoptid = 0;
+	
+	//add categories
+	$(xml).find("categories").find("category").each(function(index, element) {
+		var newcat = $( "#samplecategory" ).clone(true).hide().appendTo( "#categories" ).show();
+		
+		var catid = $(element).attr("id");
+		
+		$(newcat).attr("id", "cat" + "_" + catid);
+		
+		if(catid > maxcatid){
+			maxcatid = catid;	
+		}
+		
+		//set category settings
+		$(element).children().each(function(sindex,selement) {
+			switch($(selement)[0].nodeName){
+				case "name":
+					$(newcat).find("#inputTitle").val($(selement).text());
+					break;
+				case "description":
+					$(newcat).find("#inputDescription").val($(selement).text());
+					break;
+				case "image":
+					$(newcat).find("#inputHeader").val($(selement).text());
+					break;
+				case "starthidden":
+					if($(selement).text() == "true"){
+						$(newcat).find("#inputStartHidden").prop('checked', true);
+					}
+					break;
+				case "maxchoices":
+					$(newcat).find("#inputMaxChoices").val($(selement).text());
+					break;
+			}
+		});
+		
+		//add options
+		$(element).find("options").find("option").each(function(oindex, oelement) {
+			var newopt = $( "#sampleoption" ).clone(true).appendTo( $(newcat).find(".optionsbox") ).slideDown(800);
+			
+			var optid = $(oelement).attr("id");
+			$(newopt).attr("id", "opt_" + optid);
+			
+			if(optid > maxoptid){
+				maxoptid = optid;	
+			}
+			
+			//option settings
+			$(oelement).children().each(function(sindex,selement) {
+				switch($(selement)[0].nodeName){
+					case "name":
+						$(newopt).find("#inputTitle").val($(selement).text());
+						break;
+					case "cost":
+						$(newopt).find("#inputCost").val($(selement).text());
+						break;
+					case "description":
+						$(newopt).find("#inputDescription").val($(selement).text());
+						break;
+					case "image":
+						$(newopt).find("#inputHeader").val($(selement).text());
+						break;
+					case "starthidden":
+						if($(selement).text() == "true"){
+							$(newopt).find("#inputStartHidden").prop('checked', true);
+						}
+						break;
+					case "specification":
+						if($(selement).text() == "true"){
+							$(newopt).find("#inputSpec").prop('checked', true);
+						}
+						break;
+					case "maxquantity":
+						$(newopt).find("#inputMaxQuantity").val($(selement).text());
+						break;
+					}
+				});
+			
+			updatePrereqs();
+			lastoptid++;
+		});
+		
+	});
+	
+	//pass through again for prereqs
+	
+	//update maximum ids
+	lastcatid = maxcatid;
+	lastoptid = maxoptid;
 };
