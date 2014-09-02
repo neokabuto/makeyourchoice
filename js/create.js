@@ -56,19 +56,17 @@ $(function(){
 			return;
 		}
 		
-		var pastebinurl = "http://www.pastebin.com/raw.php?i=";
+		var pastebinurl = "http://pastebin.com/raw.php?i=";
 		
 		if(pasteinput.indexOf(".") === -1){ //assume non-URLs are pastebin IDs
 			pastebinurl += pasteinput;
 		} else {
 			if(pasteinput.indexOf("pastebin.com/") !== -1 && pasteinput.indexOf("raw.php") === -1){ //non-raw pastebin URL
 				pastebinurl += pasteinput.substr(pasteinput.indexOf(".com/") + 5);
+			} else {
+				pastebinurl = pasteinput;
 			}
-			pastebinurl = pasteinput;
 		}
-		
-		//pastebinurl = "http://pastebin.com/raw.php?i=2yht3FHq";
-		console.log(pastebinurl);
 		
 		var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from xml where url="' + pastebinurl + '"') + '&format=xml&callback=cbFunc';
 		
