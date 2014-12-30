@@ -20,29 +20,40 @@
 	<div class="container" id="body">
 		<img id="headerimg" style="width:100%;height:auto; max-height:200px; padding-top: 20px;" />
 		<h1 id="title">Title</h1>
-		<div class="category well" id="samplecategory">
-			<img />
-			<h2>Category Name</h2>
-			<p>Description</p>
-			<h4>Options:</h4>
-			<div class="options well" id="optbox">
-				<div class="option" id="sampleoption">
-					<img />
-					<h3>Option Title</h3>
-					<h4>(<span id="value">x</span> Points)</h4>
-					<p>Description</p>
-					<div class="buyone">
-						<button class="btn btn-success" >Buy</button>
-					</div>
-					<div class="buymany">
-						<button class="btn btn-success" >Buy 1</button>
-						<button class="btn btn-danger" disabled>Sell 1</button>
-					</div>
+		<p id="introtext"></p>
+		<div id="categories">
+			<div class="category well" id="samplecategory">
+				<img class="catimg" style="display:none;" />
+				<h2 class="cattitle">Category Name</h2>
+				<p class="catdesc"></p>
+				<h4>Options:</h4>
+				<div class="options well">
+					
 				</div>
-				<hr/>
 			</div>
 		</div>
     </div>
+	
+	<div class="option" id="sampleoption">
+						<img class="optimg" style="display:none;" />
+						<h3 class="opttitle">Option Title</h3>
+						<h4>(<span id="value">x</span> Points)</h4>
+						<p class="optdesc">Description</p>
+						<div class="buyone">
+							<button id="buy" class="btn btn-success" >Buy</button>
+						</div>
+						<div class="buymany">
+							<button id="buy" class="btn btn-success" >Buy 1</button>
+							<button id="sell" class="btn btn-danger" disabled>Sell 1</button>
+						</div>
+						<div class="spec form-group" style="display: none;">
+							<label for="inputTitle" class="control-label col-xs-2">Specification:</label>
+							<div class="col-xs-10">
+								<input type="text" class="form-control" id="inputSpec" placeholder="">
+							</div>
+						</div>
+					<hr/>
+					</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

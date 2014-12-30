@@ -68,19 +68,16 @@ $(function(){
 			}
 		}
 		
-		var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from xml where url="' + pastebinurl + '"') + '&format=xml&callback=cbFunc';
+		// remove protocol for proxy
+		if(pastebinurl.indexOf("://") !== -1){
+			pastebinurl = pastebinurl.substr(pastebinurl.indexOf("://") + 3);
+		}
 		
-		$.ajax({ url : yql,
-			datatype: "jsonp",
-			jsonp: "cbFunc",
-			jsonpCallback: cbFunc
-		});
+		//get XML file from URL
+		var proxyurl = "http://www.corsproxy.com/" + pastebinurl;
+		$.get(proxyurl,loadFromXML);
 	});
 });
-
-var cbFunc = function(data){
-	loadFromXML(data.results[0]);
-}
 
 var listOptions = function () {
 	var list = [];
@@ -128,6 +125,9 @@ var toXML = function() {
 	output += "\t\t<setting key=\"HeaderImage\">\n\t\t\t";
 	output += $("#inputHeader").val();
 	output += "\n\t\t</setting>\n";
+	output += "\t\t<setting key=\"IntroText\">\n\t\t\t";
+	output += $("#inputIntro").val();
+	output += "\n\t\t</setting>\n";
 	output += "\t</settings>\n";
 	
 	
@@ -169,7 +169,7 @@ var toXML = function() {
 		//write options
 		output += "\t\t\t<options>\n";
 		
-		var opts = $(cats).find(".option");
+		var opts = $(element).find(".option");
 		$(opts).each(function(oindex, oelement){
 			output += "\t\t\t\t<option id=\""+ $(oelement).attr("id").substring(4) +"\">\n";
 			
@@ -240,6 +240,9 @@ var loadFromXML = function(xml){
 				break;
 			case "HeaderImage":
 				$("#settings #inputHeader").val($(element).text());
+				break;
+			case "IntroText":
+				$("#settings #inputIntro").val($(element).text());
 				break;
 		}
 	});

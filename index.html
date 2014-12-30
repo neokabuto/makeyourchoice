@@ -31,7 +31,7 @@
 				<div class="input-group">
 				  <input type="text" class="form-control" id="pastebinurl">
 				  <span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="loadfrompastebin" onclick="window.location = 'view.html?' + $('#pastebinurl').val();">Load from Pastebin</button>
+					<button disabled class="btn btn-default" type="button" id="loadfrompastebin" onclick="window.location = 'view.html?url=' + $('#pastebinurl').val();">Load from Pastebin</button>
 				  </span>
 				</div>
 			</div>
@@ -44,5 +44,17 @@
     <script src="js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+	<script>
+	$(function() {
+		//enable button only if we have input
+		$("#pastebinurl").change( function() {
+			if($(this).val() == ""){
+				$("#loadfrompastebin").attr("disabled", true);
+			} else {
+				$("#loadfrompastebin").removeAttr("disabled");			
+			}
+		});
+	});
+	</script>
   </body>
 </html>
